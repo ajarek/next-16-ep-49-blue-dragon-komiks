@@ -1,0 +1,6 @@
+{
+  "name": "Blue Dragon: Kroniki Cienia",
+  "description": "Interaktywny komiks w stylu mangi na podstawie gry Blue Dragon (Xbox 360). Przeżyj epicką walkę Shu, Kluke, Jiro, Marumaro i Zoli przeciwko armii Nene z polskimi dialogami.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
