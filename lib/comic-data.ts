@@ -47,6 +47,7 @@ export interface ComicChapter {
 }
 
 export interface CharacterProfile {
+  image: string;
   name: string;
   title: string;
   role: string;
@@ -67,6 +68,7 @@ export interface CharacterProfile {
 
 export const CHARACTERS: CharacterProfile[] = [
   {
+    image: '/images/Shu.png',
     name: 'Shu',
     title: 'Niezłomny Chłopiec z Talta',
     role: 'Główny Bohater & Mistrz Walki Wręcz',
@@ -79,6 +81,7 @@ export const CHARACTERS: CharacterProfile[] = [
     stats: { hp: 840, mp: 420, strength: 95, magic: 75, agility: 88 }
   },
   {
+    image: '/images/Kluke.png',
     name: 'Kluke',
     title: 'Uzdrowicielka i Opiekunka Płomieni',
     role: 'Magia Biała i Czarna / Wsparcie',
@@ -91,6 +94,7 @@ export const CHARACTERS: CharacterProfile[] = [
     stats: { hp: 620, mp: 980, strength: 52, magic: 99, agility: 72 }
   },
   {
+    image: '/images/Jiro.png',
     name: 'Jiro',
     title: 'Młody Strateg z Talta',
     role: 'Taktyk i Mag Bariery',
@@ -103,6 +107,7 @@ export const CHARACTERS: CharacterProfile[] = [
     stats: { hp: 710, mp: 850, strength: 68, magic: 90, agility: 65 }
   },
   {
+    image: '/images/Marumaro.png',
     name: 'Marumaro',
     title: 'Waleczny Wojownik Devee',
     role: 'Szybki Szturmowiec / Monk',
@@ -115,6 +120,7 @@ export const CHARACTERS: CharacterProfile[] = [
     stats: { hp: 790, mp: 380, strength: 89, magic: 55, agility: 96 }
   },
   {
+    image: '/images/Zola.png',
     name: 'Zola',
     title: 'Tajemnicza Kapitan i Wojowniczka',
     role: 'Zabójczyni Cienia & Przywódczyni',
@@ -127,6 +133,7 @@ export const CHARACTERS: CharacterProfile[] = [
     stats: { hp: 880, mp: 610, strength: 92, magic: 82, agility: 91 }
   },
   {
+    image: '/images/Nene.png',
     name: 'Lord Nene',
     title: 'Tyran Starożytnej Technologii',
     role: 'Władca Mecha-Imperium & Arcymag Maszyn',
@@ -139,6 +146,7 @@ export const CHARACTERS: CharacterProfile[] = [
     stats: { hp: 9999, mp: 9999, strength: 99, magic: 99, agility: 80 }
   },
   {
+    image: '/images/Szabo.png',
     name: 'Generał Szabo',
     title: 'Mechaniczny Naczelnik Sił Nene',
     role: 'Dowódca Robotycznych Batalionów',

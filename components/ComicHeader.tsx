@@ -188,7 +188,7 @@ export const ComicHeader: React.FC<ComicHeaderProps> = ({
 
       {/* Dolny pasek wyboru rozdziału (gdy aktywny komiks) */}
       {activeTab === 'comic' && (
-        <div className="bg-slate-900/60 border-t border-slate-800/80 px-4 py-1.5 overflow-x-auto flex items-center justify-center gap-2 sm:gap-4 scrollbar-none text-xs">
+        <div className="bg-slate-900/60 border-t border-slate-800/80 px-4 py-1.5 overflow-x-auto flex flex-wrap items-center justify-center gap-2 sm:gap-4 scrollbar-none text-xs">
           <span className="text-[11px] uppercase tracking-wider text-slate-400 font-bold shrink-0">
             Rozdziały:
           </span>

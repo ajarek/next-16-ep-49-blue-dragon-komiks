@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { CHARACTERS, CharacterProfile } from '@/lib/comic-data';
 import { Volume2, Shield, Zap, Sparkles, Sword, Heart, Activity } from 'lucide-react';
 import { speakDialogueInPolish, soundManager } from '@/lib/audio';
+import Image from 'next/image';
 
 export const CharacterCodex: React.FC = () => {
   const [selectedChar, setSelectedChar] = useState<CharacterProfile>(CHARACTERS[0]);
@@ -54,9 +55,12 @@ export const CharacterCodex: React.FC = () => {
               }`}
             >
               <div>
-                <div
-                  className="w-3 h-3 rounded-full mb-2"
-                  style={{ backgroundColor: char.color }}
+                <Image
+                  src={char.image}
+                  alt={char.name}
+                  width={200}
+                  height={300}
+                  className="rounded-full mb-2"
                 />
                 <h4 className="font-extrabold text-white text-sm leading-tight">
                   {char.name}
