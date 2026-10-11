@@ -47,6 +47,7 @@ export interface ComicChapter {
 }
 
 export interface CharacterProfile {
+  video: string;
   image: string;
   name: string;
   title: string;
@@ -67,7 +68,7 @@ export interface CharacterProfile {
 }
 
 export const CHARACTERS: CharacterProfile[] = [
-  {
+  { video: '/videos/Shu.mp4', 
     image: '/images/Shu.png',
     name: 'Shu',
     title: 'Niezłomny Chłopiec z Talta',
@@ -80,7 +81,7 @@ export const CHARACTERS: CharacterProfile[] = [
     color: '#0284c7',
     stats: { hp: 840, mp: 420, strength: 95, magic: 75, agility: 88 }
   },
-  {
+  { video: '/videos/Kluke.mp4', 
     image: '/images/Kluke.png',
     name: 'Kluke',
     title: 'Uzdrowicielka i Opiekunka Płomieni',
@@ -93,7 +94,7 @@ export const CHARACTERS: CharacterProfile[] = [
     color: '#ec4899',
     stats: { hp: 620, mp: 980, strength: 52, magic: 99, agility: 72 }
   },
-  {
+  { video: '/videos/Jiro.mp4', 
     image: '/images/Jiro.png',
     name: 'Jiro',
     title: 'Młody Strateg z Talta',
@@ -107,6 +108,7 @@ export const CHARACTERS: CharacterProfile[] = [
     stats: { hp: 710, mp: 850, strength: 68, magic: 90, agility: 65 }
   },
   {
+    video: '/videos/Marumaro.mp4', 
     image: '/images/Marumaro.png',
     name: 'Marumaro',
     title: 'Waleczny Wojownik Devee',
@@ -120,6 +122,7 @@ export const CHARACTERS: CharacterProfile[] = [
     stats: { hp: 790, mp: 380, strength: 89, magic: 55, agility: 96 }
   },
   {
+    video: '/videos/Zola.mp4', 
     image: '/images/Zola.png',
     name: 'Zola',
     title: 'Tajemnicza Kapitan i Wojowniczka',
@@ -133,6 +136,7 @@ export const CHARACTERS: CharacterProfile[] = [
     stats: { hp: 880, mp: 610, strength: 92, magic: 82, agility: 91 }
   },
   {
+    video: '/videos/Nene.mp4', 
     image: '/images/Nene.png',
     name: 'Lord Nene',
     title: 'Tyran Starożytnej Technologii',
@@ -146,6 +150,7 @@ export const CHARACTERS: CharacterProfile[] = [
     stats: { hp: 9999, mp: 9999, strength: 99, magic: 99, agility: 80 }
   },
   {
+    video: '/videos/Szabo.mp4',
     image: '/images/Szabo.png',
     name: 'Generał Szabo',
     title: 'Mechaniczny Naczelnik Sił Nene',

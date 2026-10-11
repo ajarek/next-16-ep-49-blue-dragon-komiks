@@ -1,14 +1,39 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { CHARACTERS, CharacterProfile } from '@/lib/comic-data';
-import { Volume2, Shield, Zap, Sparkles, Sword, Heart, Activity } from 'lucide-react';
+import { Volume2, Shield, Zap, Sparkles, Sword, Heart, Activity, Play, RotateCcw } from 'lucide-react';
 import { speakDialogueInPolish, soundManager } from '@/lib/audio';
 import Image from 'next/image';
 
 export const CharacterCodex: React.FC = () => {
   const [selectedChar, setSelectedChar] = useState<CharacterProfile>(CHARACTERS[0]);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Odtwarzanie startuje dopiero po zamontowaniu elementu <video>.
+  useEffect(() => {
+    if (!isVideoPlaying) return;
+    videoRef.current?.play().catch(() => setIsVideoPlaying(false));
+  }, [isVideoPlaying]);
+
+  const handlePlayVideo = () => setIsVideoPlaying(true);
+
+  const handleStopVideo = () => {
+    const video = videoRef.current;
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
+    setIsVideoPlaying(false);
+  };
+
+  // Zmiana bohatera = powrót do portretu (wideo jest wtedy odmontowywane).
+  const handleSelectChar = (char: CharacterProfile) => {
+    handleStopVideo();
+    setSelectedChar(char);
+  };
 
   const handleSpeak = (char: CharacterProfile) => {
     if (char.name === 'Shu') soundManager.playDragonRoar();
@@ -47,7 +72,7 @@ export const CharacterCodex: React.FC = () => {
           return (
             <button
               key={char.name}
-              onClick={() => setSelectedChar(char)}
+              onClick={() => handleSelectChar(char)}
               className={`p-3 rounded-xl border text-left transition-all flex flex-col justify-between ${
                 isSelected
                   ? 'bg-slate-800 border-sky-400 shadow-lg shadow-sky-500/20 scale-[1.02]'
@@ -79,6 +104,82 @@ export const CharacterCodex: React.FC = () => {
 
       {/* Szczegółowa karta wybranego bohatera */}
       <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 lg:p-8 backdrop-blur-md shadow-2xl">
+        {/* Osobna karta multimediów na środku: portret -> klik -> odtworzenie wideo */}
+        <div className="mx-auto w-full max-w-3xl mb-8">
+          <div
+            className="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-700/70 bg-slate-950 shadow-xl"
+            style={{ boxShadow: `0 0 45px -12px ${selectedChar.color}80` }}
+          >
+            {isVideoPlaying ? (
+              <>
+                <video
+                  ref={videoRef}
+                  key={`video-${selectedChar.name}`}
+                  src={selectedChar.video}
+                  controls
+                  autoPlay
+                  playsInline
+                  onEnded={handleStopVideo}
+                  onError={handleStopVideo}
+                  className="w-full h-full object-contain bg-black"
+                />
+                <button
+                  onClick={handleStopVideo}
+                  className="absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950/80 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-bold transition-all backdrop-blur-sm"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>Portret</span>
+                </button>
+              </>
+            ) : (
+              <button
+                onClick={handlePlayVideo}
+                className="group relative block w-full h-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+                aria-label={`Odtwórz wideo: ${selectedChar.name}`}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
+                <Image
+                  src={selectedChar.image}
+                  alt={selectedChar.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 768px"
+                  className="object-contain p-4 drop-shadow-[0_0_25px_rgba(0,0,0,0.6)] transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/10 to-transparent" />
+
+                {/* Przycisk odtwarzania */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="flex items-center justify-center w-16 h-16 rounded-full bg-sky-500/90 shadow-lg shadow-sky-600/40 transition-all duration-300 group-hover:scale-110 group-hover:bg-sky-400">
+                    <Play className="w-7 h-7 text-white translate-x-0.5" fill="currentColor" />
+                  </span>
+                </div>
+
+                {/* Pasek informacyjny */}
+                <div className="absolute left-0 right-0 bottom-0 p-4 flex items-end justify-between gap-3">
+                  <div className="min-w-0">
+                    <span
+                      className="inline-block text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full border"
+                      style={{
+                        color: selectedChar.color,
+                        borderColor: `${selectedChar.color}66`,
+                        backgroundColor: `${selectedChar.color}1f`,
+                      }}
+                    >
+                      Karta wideo
+                    </span>
+                    <p className="mt-1.5 text-sm sm:text-base font-extrabold text-white truncate">
+                      {selectedChar.name} – {selectedChar.shadowName}
+                    </p>
+                  </div>
+                  <span className="shrink-0 text-[11px] font-bold text-slate-300 bg-slate-950/70 border border-slate-700 px-2.5 py-1 rounded-lg backdrop-blur-sm">
+                    ▶ Odtwórz intro
+                  </span>
+                </div>
+              </button>
+            )}
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Kolumna lewa: profil, cytat, przycisk odsłuchu */}
           <div className="lg:col-span-5 flex flex-col justify-between h-full space-y-6">
